@@ -1,0 +1,32 @@
+-- create Employees table
+CREATE TABLE Employees (
+  id int PRIMARY KEY,
+  name varchar
+);
+
+-- insert data into Employees table
+INSERT INTO Employees (id, name)
+VALUES
+  (1, 'Joe'),
+  (2, 'Henry'),
+  (3, 'Sam'),
+  (4, 'Max');
+
+-- create Promotion table
+CREATE TABLE Promotion (
+  id int PRIMARY KEY,
+  employeeId int,
+  FOREIGN KEY (employeeId) REFERENCES Employees(id)
+);
+
+-- insert data into Promotion table
+INSERT INTO Promotion (id, employeeId)
+VALUES
+  (1, 3),
+  (2, 1);
+
+-- run the query to display all employees who didn't get a promotion
+SELECT name as Employees FROM Employees
+WHERE id NOT IN (
+  SELECT employeeId FROM Promotion
+);
